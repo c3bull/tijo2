@@ -15,9 +15,11 @@ Sklep internetowy zajmujący się sprzedażą soków oraz napojów. Klient będz
 
 # Skład zespołu 
 
-Jakub Cebula 33151 
-Przemysław Kiełbasa 33167 
-Patryk Nytko 33189 
+Jakub Cebula 33151
+
+Przemysław Kiełbasa 33167
+
+Patryk Nytko 33189
 
 # Podział prac
 
