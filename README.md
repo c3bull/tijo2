@@ -11,7 +11,7 @@ Sklep internetowy zajmujący się sprzedażą soków oraz napojów. Klient będz
 
 # Diagram bazy danych
 
-![Diagram bazy](https://i.imgur.com/zInHT9q.png)
+![Diagram bazy](https://i.imgur.com/ClW8aja.png)
 
 # Skład zespołu 
 
