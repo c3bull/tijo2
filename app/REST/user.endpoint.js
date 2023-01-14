@@ -3,18 +3,54 @@ import applicationException from '../service/applicationException';
 
 
 const userEndpoint = (router) => {
-    router.post('/api/user/auth', async (request, response, next) => {
+    router.get('/orders', async (request, response) => {
         try {
-            let result = await business.getUserManager(request).authenticate(request.body.login, request.body.password);
+            let result = await business.getOrderManager().get();
             response.status(200).send(result);
         } catch (error) {
             applicationException.errorHandler(error, response);
         }
     });
 
-    router.post('/api/user/create', async (request, response, next) => {
+    router.post('/orders/', async (request, response) => {
         try {
-            const result = await business.getUserManager(request).createNewOrUpdate(request.body);
+            let result = await business.getOrderManager().getOrderByUserEmail(request.body.userEmail);
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
+
+    router.post('/makeOrder/', async (request, response) => {
+        try {
+            let result = await business.getOrderManager().makeOrder(request.body.data);
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
+
+    router.get('/products/:category', async (request, response) => {
+        try {
+            let result = await business.getProductManager().getProductsByCategory(request.query.category);
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
+
+    router.post('/loginUser', async (request, response, next) => {
+        try {
+            let result = await business.getUserManager().authenticate(request.body.data.email, request.body.data.password);
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
+
+    router.post('/registerUser', async (request, response) => {
+        try {
+            const result = await business.getUserManager().createNewOrUpdate(request.body);
             response.status(200).send(result);
         } catch (error) {
             applicationException.errorHandler(error, response);
@@ -23,6 +59,7 @@ const userEndpoint = (router) => {
 
     router.delete('/api/user/logout/:userId',  async (request, response, next) => {
         try {
+            console.log(request.body.userId)
             let result = await business.getUserManager(request).removeHashSession(request.body.userId);
             response.status(200).send(result);
         } catch (error) {

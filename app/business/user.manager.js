@@ -10,9 +10,9 @@ function create(context) {
     return sha1(password);
   }
 
-  async function authenticate(name, password) {
+  async function authenticate(email, password) {
     let userData;
-    const user = await UserDAO.getByEmailOrName(name);
+    const user = await UserDAO.getByEmailOrName(email);
     if (!user) {
       throw applicationException.new(applicationException.UNAUTHORIZED, 'User with that email does not exist');
     }
