@@ -1,6 +1,8 @@
 'use strict';
 
 import userManager from './user.manager';
+import orderManager from './order.manager';
+import productManager from './product.manager';
 
 
 function getter(manager, request) {
@@ -10,5 +12,7 @@ function getter(manager, request) {
 }
 
 export default {
-    getUserManager: getter(userManager)
+    getUserManager: getter(userManager),
+    getOrderManager: getter(orderManager),
+    getProductManager: getter(productManager)
 };
