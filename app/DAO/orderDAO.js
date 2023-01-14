@@ -39,8 +39,8 @@ async function getByUserEmail(email) {
 }
 
 async function makeOrder(orderDetails) {
-    const result = await OrderModel.insertOne({
-        orderProducts: orderDetails.orderProducts,
+    const result = await OrderModel.create({
+        orderedProducts: orderDetails.orderedProducts,
         placementDate: orderDetails.placementDate,
         totalPrice: orderDetails.totalPrice,
         email: orderDetails.email
@@ -51,9 +51,14 @@ async function makeOrder(orderDetails) {
     throw applicationException.new(applicationException.BAD_REQUEST, 'No orders for user with that email');
 }
 
+async function deleteLastOrder() {
+    return OrderModel.findOneAndDelete({}, {sort: {$natural: -1}})
+}
+
 export default {
     get: get,
     getByUserEmail: getByUserEmail,
     makeOrder: makeOrder,
+    deleteLastOrder: deleteLastOrder,
     model: OrderModel,
 };

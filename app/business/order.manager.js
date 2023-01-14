@@ -1,14 +1,10 @@
-import PasswordDAO from '../DAO/passwordDAO';
-import TokenDAO from '../DAO/tokenDAO';
-import UserDAO from '../DAO/userDAO';
 import OrderDAO from '../DAO/orderDAO';
-import applicationException from '../service/applicationException';
-import sha1 from 'sha1';
 
-function create(context) {
+
+function create() {
 
   function get() {
-    OrderDAO.get();
+    return OrderDAO.get();
   }
 
   function getOrderByUserEmail(email) {
@@ -19,10 +15,15 @@ function create(context) {
     return OrderDAO.makeOrder(orderDetails);
   }
 
+  function deleteLastOrder() {
+    return OrderDAO.deleteLastOrder();
+  }
+
   return {
     get: get,
     getOrderByUserEmail: getOrderByUserEmail,
     makeOrder: makeOrder,
+    deleteLastOrder: deleteLastOrder,
   };
 }
 

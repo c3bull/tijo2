@@ -41,7 +41,7 @@ const productSchema = new mongoose.Schema({
 
 const ProductModel = mongoose.model('products', productSchema);
 
-async function get() {
+async function getAll() {
     const result = await ProductModel.find();
     if (result) {
         return result;
@@ -58,6 +58,6 @@ async function getProductsByCategory(category) {
 }
 
 export default {
-    get: get,
+    getAll: getAll,
     getProductsByCategory: getProductsByCategory,
 };

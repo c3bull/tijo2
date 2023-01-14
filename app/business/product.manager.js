@@ -1,9 +1,9 @@
 import ProductsDAO from '../DAO/productDAO';
 
-function create(context) {
+function create() {
 
   function get() {
-    ProductsDAO.getAll();
+    return ProductsDAO.getAll();
   }
 
   function getProductsByCategory(category) {
