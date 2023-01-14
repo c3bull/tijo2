@@ -1,48 +1,40 @@
-import bodyParser from 'body-parser';
-import config from './config';
-import cors from 'cors';
-import express from 'express';
-import mongoose from 'mongoose';
-import morgan from 'morgan';
-import routes from './REST/routes';
+const express = require('express');
+
+import {graphqlHTTP} from 'express-graphql'
+
+import schema from './schema';
+
+
+
 
 const app = express();
-app.use(express.static(__dirname + '/public'));
 
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json({limit: '2048kb'}));
 
-app.use(express.static('public'));
 
-app.use(cors());
 
-mongoose.connect(config.databaseUrl, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-}, (error) => {
-  if (error) {
-    console.error(error);
-  }
-  else {
-    console.info('Connect with database established');
-  }
-});
+//This route will be used as an endpoint to interact with Graphql,
 
-process.on('SIGINT', () => {
-  mongoose.connection.close(function () {
-    console.error('Mongoose default connection disconnected through app termination');
-    process.exit(0);
-  });
-});
+//All queries will go through this route.
 
-routes(app);
+app.use('/graphql', graphqlHTTP({
 
-app.get('/*', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html');
-});
+  //directing express-graphql to use this schema to map out the graph
 
-app.listen(config.port, function () {
-  console.info(`Server is running at ${config.port}`)
+  schema,
+
+  //directing express-graphql to use graphiql when goto '/graphql' address in the browser
+
+  //which provides an interface to make GraphQl queries
+
+  graphiql:true
+
+}));
+
+
+
+
+app.listen(3001, () => {
+
+  console.log('Listening on port 3001');
+
 });
