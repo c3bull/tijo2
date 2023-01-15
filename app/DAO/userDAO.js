@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema({
 const UserModel = mongoose.model('user', userSchema);
 
 function createNewOrUpdate(user) {
-  console.log('user ', user)
   return Promise.resolve().then(() => {
     if (!user.id) {
       return new UserModel(user).save().then(result => {
