@@ -35,6 +35,7 @@ const productSchema = new mongoose.Schema({
     netPrice: Number,
     vat: Number,
     hint: String,
+    number: Number
 }, {
     collection: 'product'
 });
