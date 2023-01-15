@@ -13,7 +13,7 @@ describe("Test order functions", () => {
 
     test("Retrieve all orders", async () => {
         let allOrders = await business.getOrderManager().get();
-        expect(allOrders.length).toBe(8);
+        expect(allOrders.length).toBe(15);
     });
 
     test("Retrieve orders for email 'jakub.cebula9@gmail.com'", async () => {
