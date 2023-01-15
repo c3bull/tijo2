@@ -30,6 +30,15 @@ const userEndpoint = (router) => {
         }
     });
 
+    router.get('/products', async (request, response) => {
+        try {
+            let result = await business.getProductManager().get();
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
+
     router.get('/products/:category', async (request, response) => {
         try {
             let result = await business.getProductManager().getProductsByCategory(request.query.category);

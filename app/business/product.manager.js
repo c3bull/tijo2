@@ -2,7 +2,7 @@ import ProductsDAO from '../DAO/productDAO';
 
 function create() {
 
-  function get() {
+  function getAllProducts() {
     return ProductsDAO.getAll();
   }
 
@@ -11,7 +11,7 @@ function create() {
   }
 
   return {
-    get: get,
+    get: getAllProducts,
     getProductsByCategory: getProductsByCategory,
   };
 }

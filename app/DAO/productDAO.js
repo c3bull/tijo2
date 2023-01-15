@@ -46,7 +46,7 @@ async function getAll() {
     if (result) {
         return result;
     }
-  throw applicationException.new(applicationException.BAD_REQUEST, 'Could not find any orders');
+  throw applicationException.new(applicationException.BAD_REQUEST, 'Could not find any products');
 }
 
 async function getProductsByCategory(category) {
@@ -54,7 +54,7 @@ async function getProductsByCategory(category) {
     if (result) {
         return mongoConverter(result);
     }
-    throw applicationException.new(applicationException.BAD_REQUEST, 'No orders for user with that email');
+    throw applicationException.new(applicationException.BAD_REQUEST, 'No products with that category');
 }
 
 export default {
