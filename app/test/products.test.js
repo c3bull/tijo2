@@ -22,7 +22,7 @@ describe("Test product functions", () => {
     });
 
     afterAll(async done => {
-        mongoose.disconnect();
+        await mongoose.disconnect();
         done();
     });
 

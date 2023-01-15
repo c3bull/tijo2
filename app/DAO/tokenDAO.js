@@ -23,13 +23,11 @@ const tokenSchema = new mongoose.Schema({
 const TokenModel = mongoose.model('token', tokenSchema);
 
 async function create(user) {
-  const access = 'auth';
   const userData = {
     userId: user.id,
-    name: user.email,
-    role: user.role,
-    isAdmin: user.isAdmin,
-    access: access
+    email: user.email,
+    name: user.name,
+    lastName: user.lastName,
   };
   const value = jwt.sign(
     userData,

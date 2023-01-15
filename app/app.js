@@ -5,6 +5,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import routes from './REST/routes';
+import business from './business/business.container';
 
 const app = express();
 app.use(express.static(__dirname + '/public'));

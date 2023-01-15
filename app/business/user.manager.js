@@ -26,6 +26,10 @@ function create(context) {
     return {token: token.value};
   }
 
+  async function removeUserByEmail(email) {
+    return await UserDAO.removeByEmail(email);
+  }
+
   async function createNewOrUpdate(userData) {
     const user = await UserDAO.createNewOrUpdate(userData);
     if (await userData.password) {
@@ -40,9 +44,11 @@ function create(context) {
   }
 
   return {
+    hashString: hashString,
     authenticate: authenticate,
     createNewOrUpdate: createNewOrUpdate,
-    removeHashSession: removeHashSession
+    removeHashSession: removeHashSession,
+    removeUserByEmail: removeUserByEmail,
   };
 }
 

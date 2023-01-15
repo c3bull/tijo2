@@ -16,8 +16,8 @@ const userRoles = [userRole.admin, userRole.user];
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
-  name: { type: String, required: true, unique: true },
-  lastName: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  lastName: { type: String, required: true },
 }, {
   collection: 'user'
 });
@@ -62,6 +62,10 @@ async function get(id) {
   throw applicationException.new(applicationException.NOT_FOUND, 'User not found');
 }
 
+async function removeByEmail(email) {
+  return UserModel.findOneAndRemove({email: email});
+}
+
 async function removeById(id) {
   return await UserModel.findByIdAndRemove(id);
 }
@@ -71,6 +75,7 @@ export default {
   getByEmailOrName: getByEmailOrName,
   get: get,
   removeById: removeById,
+  removeByEmail: removeByEmail,
 
   userRole: userRole,
   model: UserModel
