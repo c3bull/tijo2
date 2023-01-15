@@ -16,17 +16,18 @@ const userRoles = [userRole.admin, userRole.user];
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
-  lastName: { type: String, required: true },
+  name: { type: String, required: true, unique: false },
+  lastName: { type: String, required: true, unique: false },
 }, {
   collection: 'user'
 });
 
-userSchema.plugin(uniqueValidator);
+// userSchema.plugin(uniqueValidator);
 
 const UserModel = mongoose.model('user', userSchema);
 
 function createNewOrUpdate(user) {
+  console.log('user ', user)
   return Promise.resolve().then(() => {
     if (!user.id) {
       return new UserModel(user).save().then(result => {

@@ -23,7 +23,7 @@ const userEndpoint = (router) => {
 
     router.post('/makeOrder/', async (request, response) => {
         try {
-            let result = await business.getOrderManager().makeOrder(request.body.data);
+            let result = await business.getOrderManager().makeOrder(request.body);
             response.status(200).send(result);
         } catch (error) {
             applicationException.errorHandler(error, response);
@@ -41,7 +41,7 @@ const userEndpoint = (router) => {
 
     router.post('/loginUser', async (request, response, next) => {
         try {
-            let result = await business.getUserManager().authenticate(request.body.data.email, request.body.data.password);
+            let result = await business.getUserManager().authenticate(request.body.email, request.body.password);
             response.status(200).send(result);
         } catch (error) {
             applicationException.errorHandler(error, response);
