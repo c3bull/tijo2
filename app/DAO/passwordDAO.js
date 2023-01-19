@@ -32,9 +32,18 @@ async function authorize(userId, password) {
   throw applicationException.new(applicationException.UNAUTHORIZED, 'User and password does not match');
 }
 
+async function changePassword(userId, oldPassword, newPassword) {
+  const result = await PasswordModel.findOne({ userId: userId, password: oldPassword });
+  if (result && mongoConverter(result)) {
+    return PasswordModel.findOneAndUpdate({userId: userId}, {password: newPassword});
+  }
+  throw applicationException.new(applicationException.UNAUTHORIZED, 'Could not change the password');
+}
+
 export default {
   createOrUpdate: createOrUpdate,
   authorize: authorize,
+  changePassword: changePassword,
 
   model: PasswordModel
 };

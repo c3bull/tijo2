@@ -43,12 +43,17 @@ function create(context) {
     return await TokenDAO.remove(userId);
   }
 
+  async function changePassword(userId, oldPassword, newPassword) {
+    return await PasswordDAO.changePassword(userId, hashString(oldPassword), hashString(newPassword));
+  }
+
   return {
     hashString: hashString,
     authenticate: authenticate,
     createNewOrUpdate: createNewOrUpdate,
     removeHashSession: removeHashSession,
     removeUserByEmail: removeUserByEmail,
+    changePassword: changePassword,
   };
 }
 

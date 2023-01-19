@@ -50,7 +50,6 @@ const userEndpoint = (router) => {
 
     router.post('/products/:category', async (request, response) => {
         try {
-        console.log("req ", request.body)
             let result = await business.getProductManager().getProductsByCategory(request.body.category);
             response.status(200).send(result);
         } catch (error) {
@@ -76,9 +75,17 @@ const userEndpoint = (router) => {
         }
     });
 
+    router.delete('/changePassword',  async (request, response) => {
+        try {
+            let result = await business.getUserManager().changePassword(request.body.userId, request.body.oldPassword, request.body.newPassword);
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
+
     router.delete('/api/user/logout/:userId',  async (request, response, next) => {
         try {
-            console.log(request.body.userId)
             let result = await business.getUserManager(request).removeHashSession(request.body.userId);
             response.status(200).send(result);
         } catch (error) {
