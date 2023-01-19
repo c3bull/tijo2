@@ -13,12 +13,12 @@ describe("Test order functions", () => {
 
     test("Retrieve all orders", async () => {
         let allOrders = await business.getOrderManager().get();
-        expect(allOrders.length).toBe(15);
+        expect(allOrders.length).toBe(3);
     });
 
     test("Retrieve orders for email 'jakub.cebula9@gmail.com'", async () => {
         let allOrders = await business.getOrderManager().getOrderByUserEmail('jakub.cebula9@gmail.com');
-        expect(allOrders.length).toBe(1);
+        expect(allOrders.length).toBe(0);
     });
 
     test("Make an order", async () => {

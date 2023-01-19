@@ -12,7 +12,7 @@ const userEndpoint = (router) => {
         }
     });
 
-    router.post('/orders/', async (request, response) => {
+    router.post('/orders', async (request, response) => {
         try {
             let result = await business.getOrderManager().getOrderByUserEmail(request.body.userEmail);
             response.status(200).send(result);
@@ -21,7 +21,16 @@ const userEndpoint = (router) => {
         }
     });
 
-    router.post('/makeOrder/', async (request, response) => {
+    router.delete('/removeOrder', async (request, response) => {
+        try {
+            let result = await business.getOrderManager().deleteOrderById(request.body.orderId);
+            response.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, response);
+        }
+    });
+
+    router.post('/makeOrder', async (request, response) => {
         try {
             let result = await business.getOrderManager().makeOrder(request.body);
             response.status(200).send(result);
@@ -76,8 +85,6 @@ const userEndpoint = (router) => {
             applicationException.errorHandler(error, response);
         }
     });
-
-
 };
 
 export default userEndpoint;

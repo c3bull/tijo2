@@ -19,11 +19,16 @@ function create() {
     return OrderDAO.deleteLastOrder();
   }
 
+  function deleteOrderById(orderId) {
+    return OrderDAO.deleteOrderById(orderId);
+  }
+
   return {
     get: get,
     getOrderByUserEmail: getOrderByUserEmail,
     makeOrder: makeOrder,
     deleteLastOrder: deleteLastOrder,
+    deleteOrderById: deleteOrderById,
   };
 }
 

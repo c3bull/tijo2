@@ -55,10 +55,15 @@ async function deleteLastOrder() {
     return OrderModel.findOneAndDelete({}, {sort: {$natural: -1}})
 }
 
+async function deleteOrderById(orderId) {
+    return OrderModel.findOneAndDelete({_id: orderId});
+}
+
 export default {
     get: get,
     getByUserEmail: getByUserEmail,
     makeOrder: makeOrder,
     deleteLastOrder: deleteLastOrder,
+    deleteOrderById: deleteOrderById,
     model: OrderModel,
 };
