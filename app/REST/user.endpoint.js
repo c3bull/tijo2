@@ -75,7 +75,7 @@ const userEndpoint = (router) => {
         }
     });
 
-    router.delete('/changePassword',  async (request, response) => {
+    router.put('/changePassword',  async (request, response) => {
         try {
             let result = await business.getUserManager().changePassword(request.body.userId, request.body.oldPassword, request.body.newPassword);
             response.status(200).send(result);
